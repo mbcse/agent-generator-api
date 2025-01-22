@@ -21,7 +21,11 @@ const deployAgent = async ({ characterFile }) => {
   console.log(characterFile)
   try {
     if (deployedAgentId) {
-      await deleteAgent(deployedAgentId)
+      try {
+        await deleteAgent(deployedAgentId)
+      } catch (error) {
+        console.log(error)
+      }
     } else {
       const agents = await listAllAiagents()
       agents.data.map(async (agent) => {
